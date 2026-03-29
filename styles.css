@@ -1,0 +1,1131 @@
+/* ======================================
+   AIR POLLUTION — INFORMATIONAL WEBPAGE
+   Professional Design System
+   ====================================== */
+
+/* --- Reset & Base --- */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-primary: #0a0a0f;
+    --bg-secondary: #111118;
+    --bg-card: #16161f;
+    --bg-card-hover: #1c1c28;
+    --text-primary: #f0f0f5;
+    --text-secondary: #a0a0b0;
+    --text-muted: #6a6a7a;
+    --accent: #4da6ff;
+    --accent-dim: #2d6aa0;
+    --danger: #ff4d4d;
+    --warning: #ffa726;
+    --success: #66bb6a;
+    --border: rgba(255, 255, 255, 0.06);
+    --border-light: rgba(255, 255, 255, 0.1);
+    --glow: rgba(77, 166, 255, 0.15);
+    --radius: 12px;
+    --radius-sm: 8px;
+    --radius-lg: 20px;
+    --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --max-width: 1200px;
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: var(--font);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a { color: var(--accent); text-decoration: none; transition: color var(--transition); }
+a:hover { color: #7dc0ff; }
+
+.container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+strong { color: var(--text-primary); font-weight: 600; }
+
+/* --- Navigation --- */
+.nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 16px 0;
+    transition: all var(--transition);
+    background: transparent;
+}
+
+.nav.scrolled {
+    background: rgba(10, 10, 15, 0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 0;
+}
+
+.nav-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    color: var(--text-primary);
+}
+
+.nav-icon { width: 28px; height: 28px; color: var(--accent); }
+
+.nav-links { display: flex; gap: 32px; }
+.nav-links a {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    letter-spacing: 0.5px;
+    transition: color var(--transition);
+}
+.nav-links a:hover { color: var(--text-primary); }
+
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+}
+.nav-toggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 2px;
+    transition: all var(--transition);
+}
+
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 999;
+    background: rgba(10, 10, 15, 0.98);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+}
+.mobile-menu.active { display: flex; }
+.mobile-menu a {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-toggle { display: flex; }
+}
+
+/* --- Hero --- */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    background: linear-gradient(180deg, #0a0a0f 0%, #0f1420 40%, #1a1020 70%, #0a0a0f 100%);
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(255, 77, 77, 0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 30% 60%, rgba(77, 166, 255, 0.04) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hero-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 24px;
+}
+
+.hero-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    padding: 8px 20px;
+    border: 1px solid var(--accent-dim);
+    border-radius: 100px;
+}
+
+.hero-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    letter-spacing: -1px;
+}
+
+.hero-highlight {
+    background: linear-gradient(135deg, #ff4d4d, #ff8c42, #ff4d4d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+}
+
+.hero-stat { text-align: center; }
+
+.hero-stat-number {
+    font-size: 3rem;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    color: var(--text-primary);
+    letter-spacing: -2px;
+}
+
+.hero-stat-suffix {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-left: 2px;
+}
+
+.hero-stat-label {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+}
+
+.hero-cta {
+    display: inline-block;
+    padding: 14px 36px;
+    background: var(--accent);
+    color: #000;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 100px;
+    letter-spacing: 0.5px;
+    transition: all var(--transition);
+}
+.hero-cta:hover {
+    background: #7dc0ff;
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(77, 166, 255, 0.3);
+}
+
+.hero-scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 2;
+}
+.hero-scroll-indicator span {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+.scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+    50% { opacity: 1; transform: scaleY(1); }
+}
+
+/* --- Sections --- */
+.section {
+    padding: 120px 0;
+}
+
+.section-dark {
+    background: var(--bg-secondary);
+}
+
+.section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 72px;
+}
+
+.section-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+}
+
+.section-title {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 16px;
+}
+
+.section-desc {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* --- Overview --- */
+.overview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 72px;
+}
+
+.overview-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px 28px;
+    transition: all var(--transition);
+}
+.overview-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-light);
+    transform: translateY(-4px);
+}
+
+.overview-card-icon {
+    width: 48px; height: 48px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+    color: var(--accent);
+}
+.overview-card-icon svg { width: 36px; height: 36px; }
+
+.overview-card h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.overview-card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+}
+
+/* --- AQI Scale --- */
+.aqi-scale {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+}
+
+.aqi-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.aqi-subtitle {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    margin-bottom: 32px;
+}
+
+.aqi-bar {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 4px;
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.aqi-segment {
+    background: var(--color);
+    padding: 16px 12px;
+    text-align: center;
+    transition: transform var(--transition);
+}
+.aqi-segment:hover { transform: scaleY(1.08); }
+
+.aqi-range {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 4px;
+}
+
+.aqi-label {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: rgba(0,0,0,0.7);
+}
+
+/* --- Pollutants --- */
+.pollutants-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.pollutant-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    transition: all var(--transition);
+}
+.pollutant-card:hover {
+    border-color: var(--border-light);
+    transform: translateY(-3px);
+}
+
+.pollutant-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.pollutant-formula {
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.pollutant-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 100px;
+}
+.pollutant-badge-critical {
+    background: rgba(255, 77, 77, 0.15);
+    color: #ff6b6b;
+    border: 1px solid rgba(255, 77, 77, 0.3);
+}
+
+.pollutant-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.pollutant-card > p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.pollutant-details {
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.pollutant-detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+}
+
+.pollutant-detail-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.pollutant-detail-value {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: right;
+    color: var(--text-secondary);
+}
+
+.highlight-red { color: #ff6b6b !important; }
+
+/* --- Health --- */
+.health-body-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 72px;
+}
+
+.health-organ-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.health-organ {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    cursor: default;
+    transition: all var(--transition);
+}
+.health-organ:hover, .health-organ.active {
+    border-color: var(--accent-dim);
+    background: var(--bg-card-hover);
+}
+
+.health-organ-icon {
+    width: 48px; height: 48px;
+    flex-shrink: 0;
+    color: var(--accent);
+}
+.health-organ-icon svg { width: 48px; height: 48px; }
+
+.health-organ h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.health-organ p {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.health-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.health-stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    transition: border-color var(--transition);
+}
+.health-stat-card:hover { border-color: var(--border-light); }
+
+.health-stat-number {
+    font-size: 1.8rem;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    color: var(--danger);
+    letter-spacing: -1px;
+}
+
+.health-stat-label {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+    line-height: 1.4;
+}
+
+.health-stat-source {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 8px;
+}
+
+/* Vulnerable */
+.health-vulnerable {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+}
+
+.health-vulnerable h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.vulnerable-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.vulnerable-card {
+    text-align: center;
+    padding: 24px 16px;
+}
+
+.vulnerable-icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.vulnerable-card h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.vulnerable-card p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* --- Sources --- */
+.sources-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+}
+
+.sources-chart h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 32px;
+}
+
+.donut-chart {
+    position: relative;
+    width: 260px;
+    height: 260px;
+    margin: 0 auto 32px;
+}
+
+.donut-chart svg { width: 100%; height: 100%; }
+
+.donut-center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.donut-total {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 800;
+    font-family: var(--font-mono);
+}
+
+.donut-label {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+}
+
+.donut-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    justify-content: center;
+}
+
+.donut-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+}
+
+.donut-legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.sources-details {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.source-detail-card {
+    display: flex;
+    gap: 20px;
+    padding: 24px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: all var(--transition);
+}
+.source-detail-card:hover {
+    border-color: var(--border-light);
+}
+
+.source-percent {
+    font-size: 1.5rem;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    color: var(--accent);
+    flex-shrink: 0;
+    min-width: 56px;
+}
+
+.source-detail-card h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.source-detail-card p {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* --- Regional --- */
+.regional-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 72px;
+}
+
+.region-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: all var(--transition);
+}
+.region-card:hover {
+    border-color: var(--border-light);
+    transform: translateY(-3px);
+}
+
+.region-header {
+    padding: 24px 24px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.region-header h3 { font-size: 1rem; font-weight: 700; }
+
+.region-pm25 { text-align: right; }
+.region-pm25-value {
+    font-size: 1.4rem;
+    font-weight: 800;
+    font-family: var(--font-mono);
+}
+.region-pm25-unit {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-left: 2px;
+}
+
+.region-south-asia .region-pm25-value { color: #ff4d4d; }
+.region-middle-east .region-pm25-value { color: #c060cf; }
+.region-east-asia .region-pm25-value { color: #ff6b6b; }
+.region-africa .region-pm25-value { color: #ffa726; }
+.region-latam .region-pm25-value { color: #ffd54f; }
+.region-europe .region-pm25-value { color: #66bb6a; }
+
+.region-bar-container {
+    padding: 0 24px;
+    margin-bottom: 16px;
+}
+
+.region-bar {
+    height: 6px;
+    border-radius: 3px;
+    background: var(--color);
+    width: var(--width);
+    transition: width 1s ease-out;
+}
+
+.region-facts {
+    padding: 0 24px 24px;
+    list-style: none;
+}
+.region-facts li {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    padding: 6px 0;
+    border-top: 1px solid var(--border);
+    padding-left: 12px;
+    position: relative;
+}
+.region-facts li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 13px;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--text-muted);
+}
+
+/* Most Polluted Cities */
+.most-polluted {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+}
+
+.most-polluted h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.most-polluted-source {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+}
+
+.city-bars { display: flex; flex-direction: column; gap: 12px; }
+
+.city-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.city-name {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    min-width: 160px;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.city-bar-track {
+    flex: 1;
+    height: 28px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.city-bar-fill {
+    height: 100%;
+    width: var(--width);
+    background: var(--color);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+    transition: width 1.2s ease-out;
+}
+
+.city-bar-fill span {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+/* --- Economic --- */
+.econ-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.econ-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px 28px;
+    text-align: center;
+    transition: all var(--transition);
+}
+.econ-card:hover {
+    border-color: var(--border-light);
+    transform: translateY(-3px);
+}
+
+.econ-number {
+    font-size: 2.2rem;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    color: var(--warning);
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+}
+
+.econ-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.econ-source {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    margin-top: 12px;
+}
+
+/* --- Action --- */
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-bottom: 72px;
+}
+
+.action-column {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px 28px;
+}
+
+.action-level {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+.action-list { list-style: none; }
+.action-list li {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    padding: 10px 0 10px 20px;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+}
+.action-list li:last-child { border-bottom: none; }
+.action-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 16px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+/* Success Stories */
+.success-stories {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+}
+
+.success-stories h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.story-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.story-card {
+    padding: 24px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: border-color var(--transition);
+}
+.story-card:hover { border-color: var(--success); }
+
+.story-location {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--success);
+    margin-bottom: 6px;
+}
+
+.story-stat {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.story-card p {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* --- Footer --- */
+.footer {
+    border-top: 1px solid var(--border);
+    padding: 72px 0 32px;
+    background: var(--bg-primary);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+}
+
+.footer-main h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.footer-main p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.footer-sources h4 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.footer-sources ul { list-style: none; }
+.footer-sources li {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    padding: 4px 0;
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    text-align: center;
+}
+
+.footer-bottom p {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+/* --- Animations --- */
+.fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+    .overview-grid { grid-template-columns: 1fr; }
+    .pollutants-grid { grid-template-columns: repeat(2, 1fr); }
+    .health-body-section { grid-template-columns: 1fr; }
+    .sources-layout { grid-template-columns: 1fr; }
+    .regional-grid { grid-template-columns: repeat(2, 1fr); }
+    .econ-grid { grid-template-columns: repeat(2, 1fr); }
+    .action-grid { grid-template-columns: 1fr; }
+    .story-grid { grid-template-columns: 1fr; }
+    .vulnerable-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-content { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+    .section { padding: 80px 0; }
+    .pollutants-grid { grid-template-columns: 1fr; }
+    .regional-grid { grid-template-columns: 1fr; }
+    .econ-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 24px; }
+    .aqi-bar { grid-template-columns: repeat(3, 1fr); }
+    .health-stats-grid { grid-template-columns: 1fr; }
+    .vulnerable-grid { grid-template-columns: 1fr; }
+    .city-name { min-width: 100px; font-size: 0.72rem; }
+    .most-polluted { padding: 32px 20px; }
+    .success-stories { padding: 32px 20px; }
+    .health-vulnerable { padding: 32px 20px; }
+    .aqi-scale { padding: 32px 20px; }
+}
+
+@media (max-width: 480px) {
+    .aqi-bar { grid-template-columns: repeat(2, 1fr); }
+    .hero-stat-number { font-size: 2.2rem; }
+}
